@@ -42,6 +42,8 @@ function FlatListExample(): React.JSX.Element {
         <View style={styles.container}>
             <StatusBar backgroundColor="black" barStyle='light-content' />
 
+            <Text style={styles.linhaTitle}>◎━━━━━━━━━━━━━━━━◎.◈.◎━━━━━━━━━━━━━━━━━◎</Text>
+
             <View style={styles.header}>
                 <Text style={styles.headerText}>✰𝕿𝖆𝖘𝖙𝖊 𝕺𝖋 𝖂𝖔𝖗𝖑𝖉✰</Text>
             </View>
@@ -165,13 +167,14 @@ const styles = StyleSheet.create({
     pesquisar: {
         backgroundColor: '#FFF',
         padding: 10,
-        marginVertical: 30,
+        marginVertical: 20,
         borderRadius: 30,
         borderColor: '#FFF',
         borderWidth: 3,
     },
     linhaTitle: {
-        color:'#FFF'
+        color:'#FFF',
+
     }
 });
 
