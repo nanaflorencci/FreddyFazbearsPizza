@@ -1,11 +1,15 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
-import ScrollViewExample from './src/ScrollViewExample';
 import FlatListExample from './src/FlatListExample';
+import Carrinho from './src/Carrinho';
+import Login from './src/Login'
+import CadastroProduto from './src/screens/CadastroProduto';
 
 function App(): React.JSX.Element {
   return(
-    <FlatListExample/>
+    //<FlatListExample/>
+    //<Carrinho/>
+    //<Login/>
+    <CadastroProduto/>
   );
 }
 

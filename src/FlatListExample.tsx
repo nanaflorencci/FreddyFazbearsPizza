@@ -35,6 +35,7 @@ const renderItem = ({ item }: { item: menuItem }) => (
         <Image source={item.image} style={styles.image} />
         <Text style={styles.textPreco}>R${item.preco},00</Text>
     </TouchableOpacity>
+
 );
 
 function FlatListExample(): React.JSX.Element {
