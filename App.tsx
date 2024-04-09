@@ -1,15 +1,17 @@
 import React from 'react';
-import FlatListExample from './src/FlatListExample';
+import Cardapio from './src/Cardapio';
 import Carrinho from './src/Carrinho';
 import Login from './src/Login'
 import CadastroProduto from './src/screens/CadastroProduto';
+import CadastroCliente from './src/screens/CadastroCliente';
 
 function App(): React.JSX.Element {
   return(
-    //<FlatListExample/>
+    //<Cardapio/>
     //<Carrinho/>
     //<Login/>
-    <CadastroProduto/>
+    //<CadastroProduto/>
+    <CadastroCliente/>
   );
 }
 

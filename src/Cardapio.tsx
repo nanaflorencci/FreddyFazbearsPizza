@@ -38,7 +38,7 @@ const renderItem = ({ item }: { item: menuItem }) => (
 
 );
 
-function FlatListExample(): React.JSX.Element {
+function Cardapio(): React.JSX.Element {
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor="black" barStyle='light-content' />
@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#000000' ,
         flex: 1
-
     },
     item: {
         backgroundColor: 'black',
@@ -175,8 +174,7 @@ const styles = StyleSheet.create({
     },
     linhaTitle: {
         color:'#FFF',
-
     }
 });
 
-export default FlatListExample;
+export default Cardapio;

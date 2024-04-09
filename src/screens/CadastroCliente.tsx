@@ -2,26 +2,32 @@ import React, { useState } from "react";
 import {ScrollView, Image, StatusBar, StyleSheet, Text, TextInput,TouchableOpacity, View } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
-const CadastroProduto: React.FC = () => {
-    const [produtos, setProdutos] = useState<Produto[]>([]);
+const CadastroCliente: React.FC = () => {
+    const [clientes, setClientes] = useState<[]>([]);
     const [nome, setNome] = useState<string>('');
-    const [preco, setPreco] = useState<string>('');
-    const [ingredientes, setIngredientes] = useState<string>('');
+    const [endereco, setEndereco] = useState<string>('');
+    const [telefone, setTelefone] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [cpf, setCpf] = useState<string>('');
+    const [senha, setSenha] = useState<string>('');
     const [imagem, setImagem] = useState<any>('');
 
     const CadastroProduto = async () => {
         try{
         const formData=new FormData();
         formData.append('nome', nome);
-        formData.append('preco', preco);
-        formData.append('ingredientes', ingredientes);
+        formData.append('endereco', endereco);
+        formData.append('telefone', telefone);
+        formData.append('email', email);
+        formData.append('cpf', cpf);
+        formData.append('senha', senha);
         formData.append('imagem',{
             uri:imagem,
             type:'image/jpeg',
             name:new Date()+ '.jpg',
         });
 
-const response= await axios.post('http://10.137.11.222:8000/api/produtos', formData,{
+const response= await axios.post('http://10.137.11.222:8000/api/clientes', formData,{
     headers:{
         'Content-Type':'multipart/form-data'
     }
@@ -89,22 +95,44 @@ const selecionarImagem=()=>{
             <View style={styles.form}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Nome do Produto"
+                    placeholder="Nome do cliente"
                     value={nome}
                     onChangeText={setNome}
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Preço"
-                    value={preco}
-                    onChangeText={setPreco}
+                    placeholder="Endereço"
+                    value={endereco}
+                    onChangeText={setEndereco}
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Ingredientes"
-                    value={ingredientes}
-                    onChangeText={setIngredientes}
+                    placeholder="Telefone"
+                    value={telefone}
+                    onChangeText={setTelefone}
                     multiline />
+                    
+                <TextInput
+                    style={styles.input}
+                    placeholder="email"
+                    value={email}
+                    onChangeText={setEmail}
+                    multiline />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="CPF"
+                    value={cpf}
+                    onChangeText={setCpf}
+                    multiline />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="Senha"
+                    value={senha}
+                    onChangeText={setSenha}
+                    multiline />
+
                 <View style={styles.alinhamentoImagemSelecionada}>
                     {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada} /> :null}
                 </View>
@@ -142,16 +170,16 @@ const styles = StyleSheet.create({
         marginLeft: 65
     },
     form: {
-        marginTop: 50,
-        padding: 20,
+        marginTop: 10,
+        padding: 15,
         backgroundColor: '#FFF',
         borderRadius: 10,
     },
     input: {
         height: 40,
         borderColor: '#000000',
-        borderWidth: 1,
-        marginBottom: 10,
+        borderWidth: 3,
+        marginBottom: 5,
         paddingHorizontal: 10,
         borderRadius: 10
     },
@@ -160,7 +188,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: 5,
     },
     imageButtonText: {
         color: '#FFF',
@@ -192,4 +220,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default CadastroProduto;
+export default CadastroCliente;

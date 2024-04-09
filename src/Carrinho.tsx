@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import {FlatList, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View,} from "react-native";
-import {RadioButton} from "react-native";
+import React, { useState } from 'react';
+import { StatusBar, View, Text, StyleSheet, FlatList, Image, TouchableOpacity, TextInput } from 'react-native';
 
-interface ItensCarrinho {
+interface alimentos {
     id: string;
     nome: string;
-    preco: number;
     ingredientes: string;
+    preco: number;
     image: any;
 }
 
-const dados: ItensCarrinho[] = [
+const dados: alimentos[] = [
     {id: '1', nome: '𝒴𝒶𝓀𝒾𝓈𝑜𝒷𝒶', ingredientes: 'Massa, carne, molho tarê, cenoura e brocolis.', preco:  55.00, image: require('../src/assets/images/yakisoba.png')},
     {id: "2",nome: "𝒫𝒾𝓏𝓏𝒶", ingredientes: 'Massa, molho, queijo, peperone e manjericão.', preco:  35.00, image: require('../src/assets/images/pizza.png')},
     {id: "3",nome: "𝐵𝒶𝒷𝒶𝑔𝒶𝓃𝑜𝓊𝓈𝒽",  ingredientes: 'Berinjelas, pasta de gergelim, azeite e alho.', preco:  25.00, image: require('../src/assets/images/babaganoush.png')},
@@ -28,207 +27,168 @@ const dados: ItensCarrinho[] = [
     {id: "15",nome: "𝒞𝑒𝓋𝒾𝒸𝒽𝑒",  ingredientes: 'Tilápia, pasta de alho, pimenta e cebola.', preco:  40.00, image: require('../src/assets/images/ceviche.png')}
 ];
 
-function Carrinho(): React.JSX.Element {
-    const [checked, setChecked] = React.useState('first');
-    const [count, setCount] = useState(9)
-
-const renderItem = ({item}: {item: ItensCarrinho}) => (
-        <View style={styles.itensCardapio}>
-        <Image source={item.image} style={styles.images}/>
-        <Text style={styles.nameText}>{item.nome}</Text>
-        <Text style={styles.itensText}>{item.ingredientes}</Text>
-        <Text style={styles.precoText}>R$: {item.preco}</Text>
-        <TouchableOpacity onPress={() => setCount(count - 1)}>
-        <Image source={require('./assets/images/lixo1.png')} style={styles.cartImage}/>
-        </TouchableOpacity>
+const renderItem = ({ item }: { item: alimentos }) => (
+    <View style={styles.item}>
+        <Text style={styles.itemTitle}>{item.nome}</Text>
+        <Text style={styles.linhas}>◇───────────────◇───────────────◇</Text>
+        <Text style={styles.textIngredientes}>{item.ingredientes}</Text>
+        <Image source={item.image} style={styles.image} />
+        <View style={styles.buttom}>
+        <Text style={styles.textPreco}>R${item.preco},00</Text>
+        <Text style={styles.textquantidade}>Quantidade:</Text>
+            <TouchableOpacity>
+                <Text style={styles.botoes}>   +   </Text>
+            </TouchableOpacity>
+            <TextInput style={styles.numero}></TextInput>
+            <TouchableOpacity>
+                <Text style={styles.botoes}>   -   </Text>
+            </TouchableOpacity>
         </View>
-       
+    </View>
+
 );
 
+function Carrinho(): React.JSX.Element {
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-        <ImageBackground source={require('./assets/images/headerFundo.jpg')}
-        style={styles.ImageBackgroundHeader}/>
-            <Image source={require('./assets/images/logo.png')}
-            style={styles.Logo}/>
-            <Text style={styles.headerText}>Carrinho</Text>
-        </View>
-        <ImageBackground source={require('./assets/images/fundo2.jpg')}
-        style={styles.ImageBackground}/>
-        <FlatList showsVerticalScrollIndicator={false} data={dados}
-        renderItem={renderItem} keyExtractor={(item) => item.id}/>
         
+        <View style={styles.container}>
+            <StatusBar backgroundColor='black' barStyle='light-content' />
 
-        <Text style={styles.pagamento}>Forma de pagamento:</Text>
-         <View style={styles.RadioButton}>
-         <RadioButton
-        value="Pix"
-        status={ checked === 'first' ? 'checked' : 'unchecked' }
-        onPress={() => setChecked('first')} />
-        <Text style={styles.textRadioButton}>PIX</Text>
+            <Text style={styles.linhaTitle}>◎━━━━━━━━━━━━━━━━◎.◈.◎━━━━━━━━━━━━━━━━━◎</Text>
+
+
+            <View style={styles.header}>
+                <Text style={styles.headerText}>✰𝕿𝖆𝖘𝖙𝖊 𝕺𝖋 𝖂𝖔𝖗𝖑𝖉✰</Text>
+            </View>
+
+            <Text style={styles.linhaTitle}>◎━━━━━━━━━━━━━━━━◎.◈.◎━━━━━━━━━━━━━━━━━◎</Text>
+
+            <FlatList style={styles.container}
+                showsVerticalScrollIndicator={false}
+                data={dados}
+                renderItem={renderItem}
+                keyExtractor={(pratos) => pratos.id}
+            />
+
+            <View style={styles.footer}>
+                <TouchableOpacity>
+                    <Image source={require('./assets/images/home.webp')} style={styles.footerIcon} />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image source={require('./assets/images/menu.png')} style={styles.footerIcon} />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image source={require('./assets/images/carrinho.webp')} style={styles.footerIcon} />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image source={require('./assets/images/perfil.png')} style={styles.footerIcon} />
+                </TouchableOpacity>
+
+            </View>
+
         </View>
 
-        <View style={styles.RadioButton}>
-        <RadioButton
-        value="Cartao"
-        status={ checked === 'second' ? 'checked' : 'unchecked' }
-        onPress={() => setChecked('second')} />
-        <Text style={styles.textRadioButton}>Cartão</Text>
-        </View>
-   
-        <View style={styles.RadioButton}>
-        <RadioButton
-        value="dinheiro fisico"
-        status={ checked === 'third' ? 'checked' : 'unchecked' }
-        onPress={() => setChecked('third')} />
-        <Text style={styles.textRadioButton}>Dinheiro</Text>
-         </View>
-        
-        <View style={styles.footer}>
-            <TouchableOpacity>
-                <Image source={require('./assets/images/home.png')}
-                style={styles.footerIcon}/>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-                <Image source={require('./assets/images/pedido.png')}
-                style={styles.footerIcon}/>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-                <Image source={require('./assets/images/profile.png')}
-                style={styles.footerIcon}/>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-                <Image source={require('./assets/images/menu.jpg')}
-                style={styles.footerIcon}/>
-            </TouchableOpacity>
-
-            <TouchableOpacity >
-                <Image source={require('./assets/images/cartA.png')}
-                style={styles.footerIcon}/>
-            </TouchableOpacity>
-            <Text style={styles.countText}>{count}</Text>
-            
-        </View>
-      </View>
     );
-}
 
+}
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        backgroundColor: '#000000' ,
+        flex: 1
     },
-    itensCardapio: {
-        padding: 10,
-        marginVertical: 16,
-        marginHorizontal: 16,
-        flexDirection: 'column',
-        borderRadius: 20,
-    },
-    ImageBackground: {
-        flex: 1,
-        width: 393,
-        height: 516,
-        marginVertical: -20,
-        marginTop: 100,
-       
-    },
-    ImageBackgroundHeader: {
-        flex: 1,
-        width: 413,
-        height: 170,
-    },
-    Logo: {
-        height: 150,
-        width: 150,
-        marginTop: -15,
-    },
-    images: {
-        width: 100,
+    image: {
         height: 100,
+        width: 170,
+        borderRadius: 10,
+        borderWidth: 3,
+        marginLeft: 'auto',
         marginRight: 'auto',
-        borderRadius: 20
+        marginTop: 15
     },
-    cartImage: {
-        width: 45,
-        height: 45,
-        marginLeft: 280,
-        marginTop: -25,
+    itemTitle:{
+        fontSize: 30,
+        color:'#FFF',
+        marginTop: 3
+    },
+    textPreco: {
+        color: '#FFF',
+        flexDirection: 'column',
+        fontSize:15,
+        marginTop: 10,
+        fontStyle: 'italic'
+    },
+    textquantidade:{
+        color: '#FFF',
+        flexDirection: 'column',
+        fontSize: 17,
+        marginTop: 50,
+        marginLeft:100,
+    },
+    textIngredientes: {
+        color: '#FFF',
+        flexDirection: 'column',
+        fontSize:17,
+        marginTop: 3,
+        fontStyle: 'italic',
+        paddingVertical: 5,
+    },
+    item: {
+        backgroundColor: 'black',
+        padding: 20,
+        marginVertical: 10,
+        borderRadius: 30,
+        borderColor: '#FFF',
+        borderWidth: 3
     },
     header: {
+        backgroundColor: "#000000",
+        flexDirection: 'row',
+        height: 100,
         alignItems: 'center',
-        height: 70,
-       
+        paddingVertical: 10,
+        borderColor: '#FFF',
+        borderRadius: 30
     },
     headerText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#bdbdbd',
-        marginTop: -20,
-    },
-    nameText: {
-        fontSize: 25,
-        fontWeight: 'bold',
-        color: 'white',
-        textAlign: 'left',
-        marginStart: 110,
-        marginTop: -105
-    },
-    countText: {
-        backgroundColor: 'black',
-        fontSize: 10,
-        fontWeight: 'bold',
-        color: 'white',
-        textAlign: 'center',
-        left: -13,
-        width: 15,
-        height: 15,
-        borderRadius: 100,
-        marginTop: -20       
-    },
-    itensText: {
-        fontSize: 15,
-        fontWeight: '500',
-        color: 'white',
-        textAlign: 'left',
-        marginStart: 110
-    },
-    precoText: {
-        fontSize: 20,
-        fontWeight: 'normal',
-        color: 'white',
-        textAlign: 'center',
-        marginStart: -35
+        fontSize: 30,
+        color: '#FFF',
+        marginLeft: 65
     },
     footer: {
         borderTopWidth: 0.2,
-        backgroundColor: 'white',
-        flexDirection: 'row',
+        backgroundColor: '#FFF',
+        flexDirection: "row",
         justifyContent: 'space-around',
         alignItems: 'center',
-        paddingVertical: 21
+        paddingVertical: 10
     },
     footerIcon: {
-        left: 30,
-        width: 30,
-        height: 30
+        height: 30,
+        width: 30
     },
-    RadioButton: {
-        flexDirection: 'row',
+    linhas: {
+        color: '#FFF',
     },
-    textRadioButton: {
-        color: 'white',
-        width: 70,
-        marginTop: 5
+    buttom: {
+        flexDirection:"row",
     },
-    pagamento: {
-        color: 'white',
-        fontSize: 20,
-        marginTop: 10
-    }
-})
+    numero:{
+        color:'#FFF',
+        textAlign:'center',
+        justifyContent:'center',
+        fontSize:18,
+        marginTop: -14
+    },
+    botoes: {
+        borderTopWidth: 1,
+        backgroundColor: '#FFF',
+        borderRadius: 10,
+        marginLeft: 10,
+        marginTop: 50
+    },
+    linhaTitle: {
+        color:'#FFF',
+    },
+});
 
 export default Carrinho;
