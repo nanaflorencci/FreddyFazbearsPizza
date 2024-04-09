@@ -95,40 +95,40 @@ const selecionarImagem=()=>{
             <View style={styles.form}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Nome do cliente"
+                    placeholder="Nome do cliente:"
                     value={nome}
                     onChangeText={setNome}
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Endereço"
+                    placeholder="Endereço:"
                     value={endereco}
                     onChangeText={setEndereco}
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Telefone"
+                    placeholder="Telefone:"
                     value={telefone}
                     onChangeText={setTelefone}
                     multiline />
                     
                 <TextInput
                     style={styles.input}
-                    placeholder="email"
+                    placeholder="E-mail:"
                     value={email}
                     onChangeText={setEmail}
                     multiline />
 
                 <TextInput
                     style={styles.input}
-                    placeholder="CPF"
+                    placeholder="CPF:"
                     value={cpf}
                     onChangeText={setCpf}
                     multiline />
 
                 <TextInput
                     style={styles.input}
-                    placeholder="Senha"
+                    placeholder="Senha:"
                     value={senha}
                     onChangeText={setSenha}
                     multiline />

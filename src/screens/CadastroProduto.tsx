@@ -89,19 +89,19 @@ const selecionarImagem=()=>{
             <View style={styles.form}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Nome do Produto"
+                    placeholder="Nome do produto:"
                     value={nome}
                     onChangeText={setNome}
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Preço"
+                    placeholder="Preço:"
                     value={preco}
                     onChangeText={setPreco}
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="Ingredientes"
+                    placeholder="Ingredientes:"
                     value={ingredientes}
                     onChangeText={setIngredientes}
                     multiline />
