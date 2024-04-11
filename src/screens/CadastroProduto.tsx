@@ -21,7 +21,7 @@ const CadastroProduto: React.FC = () => {
             name:new Date()+ '.jpg',
         });
 
-const response= await axios.post('http://10.137.11.222:8000/api/produtos', formData,{
+const response= await axios.post('http://10.137.11.221:8000/api/produtos', formData,{
     headers:{
         'Content-Type':'multipart/form-data'
     }
@@ -41,9 +41,9 @@ const abrirCamera=()=>{
 
     launchCamera(options, response =>{
         if(response.didCancel){
-            console.log('cancelado pelo usuario');
+            console.log('Cancelado pelo usuário');
         }else if(response.error){
-            console.log('erro ao abrir a camera');
+            console.log('Erro ao abrir a câmera');
         }else{
             let imageUri = response.uri|| response.assets?.[0]?.uri;
             setImagem(imageUri);
@@ -61,9 +61,9 @@ const selecionarImagem=()=>{
     
     launchImageLibrary(options,(response)=>{
         if(response.didCancel){
-            console.log('cancelado pelo usuario')
+            console.log('Cancelado pelo usuário')
         }else if(response.error){
-            console.log('erro ao abrir a galeria');
+            console.log('Erro ao abrir a galeria');
         }else{
             let imageUri=response.uri || response.assets?.[0]?.uri;
             setImagem(imageUri);
@@ -87,6 +87,11 @@ const selecionarImagem=()=>{
             <Text style={styles.linhaTitle}>◎━━━━━━━━━━━━━━━━◎.◈.◎━━━━━━━━━━━━━━━━━◎</Text>
 
             <View style={styles.form}>
+
+            <View style={styles.alinhamentoImagemSelecionada}>
+                    {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada} /> :null}
+                </View>
+
                 <TextInput
                     style={styles.input}
                     placeholder="Nome do produto:"
@@ -109,13 +114,13 @@ const selecionarImagem=()=>{
                     {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada} /> :null}
                 </View>
                 <TouchableOpacity style={styles.imageButton} onPress={selecionarImagem}>
-                    <Text style={styles.imageButtonText}>Selecionar Imagem</Text>
+                    <Text style={styles.imageButtonText}>Selecionar imagem</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.imageButton} onPress={abrirCamera}>
-                    <Text style={styles.imageButtonText}>Tirar Foto</Text>
+                    <Text style={styles.imageButtonText}>Tirar foto</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.imageButton} onPress={CadastroProduto}>
-                    <Text style={styles.imageButtonText}>Cadastrar Produto</Text>
+                    <Text style={styles.imageButtonText}>Cadastrar produto</Text>
                 </TouchableOpacity>
             </View>
             </ScrollView>
@@ -172,6 +177,8 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         borderRadius: 5,
         marginBottom: 10,
+        borderWidth: 10,
+        borderColor: '#000000'
     },
     alinhamentoImagemSelecionada: {
         alignItems: 'center'
