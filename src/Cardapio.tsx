@@ -1,5 +1,7 @@
 import React from "react";
 import { FlatList, Image, StatusBar, StyleSheet, Text, TextInput, TextInputBase, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import CadastroProduto from "./screens/CadastroProduto";
 
 interface menuItem {
     id: string;
@@ -39,6 +41,9 @@ const renderItem = ({ item }: { item: menuItem }) => (
 );
 
 function Cardapio(): React.JSX.Element {
+
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor="black" barStyle='light-content' />
@@ -67,11 +72,11 @@ function Cardapio(): React.JSX.Element {
                     <Image source={require('./assets/images/home.webp')} style={styles.footerIcon} />
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Cardapio')}>
                 <Image source={require('./assets/images/pedidos.webp')} style={styles.footerIcon}/>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('CadastroProduto')}>
                 <Image source={require('./assets/images/perfil.png')} style={styles.footerIcon}/>
                 </TouchableOpacity>
 
